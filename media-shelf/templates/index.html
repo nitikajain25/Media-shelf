@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Shelf Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Modern CSS Reset & Variables */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Nunito', sans-serif; }
+        
+        body {
+            /* Updated to match the deep navy blue of the logo's outer ring */
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b4965 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        /* Header & Logo Area */
+        .header-section { text-align: center; margin-bottom: 40px; }
+        
+        .logo-img {
+            max-width: 240px; /* Scales the logo perfectly */
+            height: auto;
+            margin-bottom: 5px;
+            filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.3)); /* Adds a slight pop */
+        }
+        
+        .subtitle-pill {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 14px;
+            margin: 10px 0 25px 0;
+            color: #cae9ff;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Updated stats to match the Orange Arrow and Teal accents */
+        .stat-box h3 { color: #f08a32; font-size: 24px; font-weight: 800; }
+        .stat-box.complete-stat h3 { color: #1da1f2; }
+        .stat-box p { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+
+        .progress-bar-bg {
+            width: 250px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            background: #1da1f2; /* Teal progress */
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* The Input Form */
+        form {
+            background: #fff;
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            gap: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        input { flex: 1; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; font-size: 16px; outline: none; color: #1a2b4c; }
+        select { padding: 15px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 15px; background: #fff; outline: none; color: #1a2b4c; }
+        
+        .submit-btn {
+            background: #f08a32; /* Logo Orange Arrow */
+            color: #fff; border: none; padding: 0 30px;
+            border-radius: 8px; font-weight: 800; font-size: 16px; cursor: pointer;
+            transition: 0.2s;
+        }
+        .submit-btn:hover { background: #e07622; }
+
+        /* The Dashboard Columns */
+        .dashboard { display: flex; gap: 20px; }
+        .column { flex: 1; }
+        
+        .column-header {
+            background: #fff; color: #1a2b4c; padding: 15px 20px; border-radius: 10px;
+            display: flex; justify-content: space-between; align-items: center;
+            font-weight: 800; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .badge { background: #f08a32; color: white; padding: 2px 10px; border-radius: 12px; font-size: 12px; }
+        .completed-col .badge { background: #1da1f2; }
+
+        /* Item Cards */
+        .item-card {
+            background: #fff; color: #1a2b4c; padding: 15px 20px; border-radius: 10px;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .item-info { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+        
+        .actions { display: flex; gap: 8px; }
+        
+        /* Updated Buttons */
+        .done-btn { background: #1da1f2; color: white; border: none; padding: 8px 15px; border-radius: 6px; font-weight: 700; cursor: pointer; }
+        .done-btn:hover { background: #168ac3; }
+        
+        /* Matches the Red Folder */
+        .delete-btn { background: #fceaea; color: #c82a36; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .delete-btn:hover { background: #f5d5d5; }
+
+        .completed-col .item-info { text-decoration: line-through; color: #95a5a6; }
+
+        /* Simple responsive stack for phones */
+        @media(max-width: 768px) {
+            .dashboard { flex-direction: column; }
+            form { flex-direction: column; }
+            .submit-btn { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header-section">
+            <img src="../static/logo.png" alt="Media Shelf Logo" class="logo-img">
+            <br>
+            <div class="subtitle-pill">Track your reading & watching journey</div>
+            
+            <div class="stats-container">
+                <div class="stat-box">
+                    <h3 id="total-count">0</h3>
+                    <p>Total Items</p>
+                </div>
+                <div class="stat-box complete-stat">
+                    <h3 id="percent-count">0%</h3>
+                    <p>Completed</p>
+                </div>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress-bar"></div>
+            </div>
+        </div>
+
+        <form id="media-form">
+            <input type="text" id="item-title" placeholder="Enter title..." required>
+            <select id="item-type">
+                <option value="Book">📚 Book</option>
+                <option value="Movie">🎬 Movie</option>
+            </select>
+            <button type="submit" class="submit-btn">Add to Shelf</button>
+        </form>
+
+        <div class="dashboard">
+            <div class="column">
+                <div class="column-header">
+                    <span>⏳ Up Next</span>
+                    <span class="badge" id="pending-badge">0</span>
+                </div>
+                <div id="pending-list"></div>
+            </div>
+
+            <div class="column completed-col">
+                <div class="column-header">
+                    <span style="color: #1da1f2;">✅ Completed</span>
+                    <span class="badge" id="completed-badge">0</span>
+                </div>
+                <div id="completed-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const mediaForm = document.getElementById('media-form');
+
+        async function loadShelf() {
+            const response = await fetch('/api/items');
+            const items = await response.json();
+            
+            const pendingDiv = document.getElementById('pending-list');
+            const completedDiv = document.getElementById('completed-list');
+            
+            pendingDiv.innerHTML = '';
+            completedDiv.innerHTML = '';
+            
+            let pendingCount = 0;
+            let completedCount = 0;
+
+            items.forEach(item => {
+                const icon = item.media_type === 'Book' ? '📚' : '🎬';
+                const card = document.createElement('div');
+                card.className = 'item-card';
+
+                if (item.status === 'pending') {
+                    pendingCount++;
+                    card.innerHTML = `
+                        <div class="item-info">${icon} ${item.title}</div>
+                        <div class="actions">
+                            <button class="done-btn" onclick="markAsComplete(${item.id})">Done</button>
+                            <button class="delete-btn" onclick="deleteItem(${item.id})">✕</button>
+                        </div>
+                    `;
+                    pendingDiv.appendChild(card);
+                } else {
+                    completedCount++;
+                    card.innerHTML = `
+                        <div class="item-info">${icon} ${item.title} ⭐</div>
+                        <div class="actions">
+                            <button class="delete-btn" onclick="deleteItem(${item.id})">✕</button>
+                        </div>
+                    `;
+                    completedDiv.appendChild(card);
+                }
+            });
+
+            const totalItems = pendingCount + completedCount;
+            let completionPercentage = 0;
+            if (totalItems > 0) {
+                completionPercentage = Math.round((completedCount / totalItems) * 100);
+            }
+
+            document.getElementById('total-count').innerText = totalItems;
+            document.getElementById('percent-count').innerText = `${completionPercentage}%`;
+            document.getElementById('progress-bar').style.width = `${completionPercentage}%`;
+            
+            document.getElementById('pending-badge').innerText = pendingCount;
+            document.getElementById('completed-badge').innerText = completedCount;
+        }
+
+        mediaForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const title = document.getElementById('item-title').value;
+            const media_type = document.getElementById('item-type').value;
+
+            await fetch('/api/items', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ title, media_type })
+            });
+
+            document.getElementById('item-title').value = '';
+            loadShelf();
+        });
+
+        async function markAsComplete(id) {
+            await fetch(`/api/items/${id}`, { method: 'PUT' });
+            loadShelf();
+        }
+
+        async function deleteItem(id) {
+            if(confirm("Are you sure you want to remove this from your shelf?")) {
+                await fetch(`/api/items/${id}`, { method: 'DELETE' });
+                loadShelf();
+            }
+        }
+
+        loadShelf();
+    </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+# Ignore the local database file (so we don't upload personal data)
+shelf.db
+
+# Ignore Python cache folders
+__pycache__/
+*.pyc
