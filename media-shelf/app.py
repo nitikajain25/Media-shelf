@@ -1,14 +1,17 @@
 import sqlite3
+import requests
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 DB_FILE = "shelf.db"
 
+# Your specific OMDb API Key
+OMDB_API_KEY = "b44b03be" 
+
 # ==========================================
 # DATABASE SETUP
 # ==========================================
 def init_db():
-    """Connects to SQLite and creates the data table if it doesn't exist."""
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     cursor.execute("""
@@ -16,13 +19,13 @@ def init_db():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
             media_type TEXT NOT NULL,
-            status TEXT DEFAULT 'pending'
+            status TEXT DEFAULT 'pending',
+            poster_url TEXT 
         )
     """)
     conn.commit()
     conn.close()
 
-# Initialize the database file automatically when the script loads
 init_db()
 
 
@@ -32,28 +35,23 @@ init_db()
 
 @app.route('/')
 def home():
-    """Serves the frontend HTML file."""
     return render_template('index.html')
 
 
 @app.route('/api/items', methods=['GET'])
 def get_items():
-    """Fetches all items from the database and returns them to the frontend."""
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
-    
-    # ORDER BY id ASC ensures older items stay at the top
-    cursor.execute("SELECT id, title, media_type, status FROM media_shelf ORDER BY id ASC")
+    cursor.execute("SELECT id, title, media_type, status, poster_url FROM media_shelf ORDER BY id ASC")
     rows = cursor.fetchall()
     conn.close()
 
-    items = [{"id": r[0], "title": r[1], "media_type": r[2], "status": r[3]} for r in rows]
+    items = [{"id": r[0], "title": r[1], "media_type": r[2], "status": r[3], "poster_url": r[4]} for r in rows]
     return jsonify(items)
 
 
 @app.route('/api/items', methods=['POST'])
 def add_item():
-    """Takes form data from the frontend and saves it to the database."""
     data = request.get_json()
     title = data.get('title')
     media_type = data.get('media_type')
@@ -61,9 +59,42 @@ def add_item():
     if not title or not media_type:
         return jsonify({"error": "Missing fields"}), 400
 
+    poster_url = None 
+    print(f"--- Searching for {media_type}: {title} ---") # Terminal feedback!
+    
+    try:
+        if media_type == 'Movie':
+            omdb_response = requests.get(f"http://www.omdbapi.com/?t={title}&apikey={OMDB_API_KEY}")
+            omdb_data = omdb_response.json()
+            if omdb_data.get("Response") == "True" and omdb_data.get("Poster") != "N/A":
+                poster_url = omdb_data.get("Poster")
+                
+        elif media_type == 'Book':
+            safe_title = title.replace(" ", "+")
+            # Switching to OpenLibrary API (Friendly to Python!)
+            ol_response = requests.get(f"https://openlibrary.org/search.json?title={safe_title}")
+            ol_data = ol_response.json()
+            
+            if "docs" in ol_data:
+                for doc in ol_data["docs"]:
+                    if "cover_i" in doc: # Look for a valid cover ID
+                        cover_id = doc["cover_i"]
+                        poster_url = f"https://covers.openlibrary.org/b/id/{cover_id}-M.jpg"
+                        break 
+                        
+        # Print the result to the terminal so we can see what happened
+        if poster_url:
+            print(f"Success! Found image link: {poster_url}")
+        else:
+            print("Failed: Could not find an image for this title.")
+                        
+    except Exception as e:
+        print(f"Error fetching {media_type} poster:", e)
+
+    # Save to SQLite
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO media_shelf (title, media_type) VALUES (?, ?)", (title, media_type))
+    cursor.execute("INSERT INTO media_shelf (title, media_type, poster_url) VALUES (?, ?, ?)", (title, media_type, poster_url))
     conn.commit()
     conn.close()
 
@@ -72,7 +103,6 @@ def add_item():
 
 @app.route('/api/items/<int:item_id>', methods=['PUT'])
 def complete_item(item_id):
-    """Updates an item's status to 'completed'."""
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     cursor.execute("UPDATE media_shelf SET status = 'completed' WHERE id = ?", (item_id,))
@@ -84,7 +114,6 @@ def complete_item(item_id):
 
 @app.route('/api/items/<int:item_id>', methods=['DELETE'])
 def delete_item(item_id):
-    """Removes an item from the database permanently."""
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     cursor.execute("DELETE FROM media_shelf WHERE id = ?", (item_id,))
@@ -98,5 +127,4 @@ def delete_item(item_id):
 # LOCAL HOSTING
 # ==========================================
 if __name__ == '__main__':
-    # host='0.0.0.0' allows access across your local home network!
     app.run(host='0.0.0.0', port=5000, debug=True)
