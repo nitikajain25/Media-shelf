@@ -1,0 +1,673 @@
+/* =========================================
+   MEDIA SHELF - MODERN AESTHETIC
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  
+  /* Your custom background */
+  background-image: url('./bg-check.jpg');
+  background-size: 300px;
+  background-attachment: fixed;
+  background-color: #f8f9fa;
+  color: #1a1a1a;
+}
+
+.landing-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+/* Floating Navbar */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  width: 90%;
+  max-width: 900px;
+  margin-top: 30px;
+  padding: 12px 20px 12px 30px;
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Adds perfect spacing between the logo and the text */
+  text-decoration: none; /* In case you make it clickable later */
+}
+
+.nav-logo-img {
+  height: 35px; 
+  width: auto;
+}
+
+/* NEW: Styling for the Media Shelf text */
+.brand-text {
+  font-size: 20px;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #4a4a4a;
+  font-weight: 600;
+  font-size: 15px;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: #000;
+}
+
+.nav-sign-in {
+  background: #111827;
+  color: #fff;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.nav-sign-in:hover {
+  background: #374151;
+  transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  margin-top: 10vh;
+  margin-bottom: 50px;
+  padding: 0 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Frosted panel to make text readable over the background pattern */
+.hero-glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 60px 40px;
+  border-radius: 40px;
+  max-width: 750px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+.hero-title {
+  font-size: 68px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1.15;
+  color: #111827;
+  margin: 0 0 25px 0;
+}
+
+.hero-subtitle {
+  font-size: 17px;
+  color: #4b5563;
+  line-height: 1.7;
+  margin-bottom: 45px;
+  max-width: 550px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background: #272838;
+  color: #fff;
+  border: none;
+  padding: 18px 40px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 17px;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(39, 40, 56, 0.25);
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(39, 40, 56, 0.35);
+  background: #1a1b26;
+}
+
+/* Features Section */
+.features-section {
+  width: 100%;
+  max-width: 900px;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 50px;
+  text-shadow: 0 2px 10px rgba(255,255,255,0.8); /* Helps it pop off the background */
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(15px);
+  padding: 40px 30px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: 0.3s ease;
+  text-align: left;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.feature-icon {
+  font-size: 32px;
+  display: inline-block;
+  margin-bottom: 20px;
+  background: #f3f4f6;
+  padding: 15px;
+  border-radius: 16px;
+}
+
+.feature-card h3 {
+  margin: 0 0 15px 0;
+  font-size: 20px;
+  color: #111827;
+}
+
+.feature-card p {
+  margin: 0;
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* About Section */
+.about-section {
+  width: 100%;
+  max-width: 900px;
+  padding: 40px 20px 80px 20px;
+}
+
+.about-glass-panel {
+  background: rgba(17, 24, 39, 0.9); /* Dark blue to contrast the white features */
+  backdrop-filter: blur(20px);
+  padding: 60px;
+  border-radius: 30px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.about-glass-panel .section-title {
+  color: white;
+  text-shadow: none;
+  margin-bottom: 25px;
+}
+
+.about-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #d1d5db;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Footer Section */
+.landing-footer {
+  width: 100%;
+  max-width: 900px;
+  margin: auto auto 20px auto;
+  padding: 20px;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  font-size: 13px;
+  color: #6b7280;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+}
+
+.crafted-by strong {
+  color: #111827;
+}
+
+/* Make it responsive for phones */
+@media(max-width: 768px) {
+  .hero-title { font-size: 42px; }
+  .top-nav { flex-direction: column; gap: 15px; border-radius: 25px; padding: 20px; }
+  .nav-links { gap: 20px; }
+  .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+}
+/* =========================================
+   LOGIN PAGE STYLES
+   ========================================= */
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-logo {
+  height: 80px; /* Increased from 45px to make it much larger! */
+  margin-bottom: 30px;
+  cursor: pointer;
+  filter: drop-shadow(0px 6px 12px rgba(0,0,0,0.15));
+}
+
+.login-card {
+  /* Changed to a soft, aesthetic pastel blue */
+  background: rgb(246, 247, 249); 
+  backdrop-filter: blur(15px);
+  width: 100%;
+  max-width: 440px;
+  padding: 40px;
+  border-radius: 24px;
+  /* Gave the shadow a subtle blue tint */
+  box-shadow: 0 15px 35px rgba(0, 80, 200, 0.1); 
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  text-align: left;
+}
+
+.login-card h2 {
+  font-size: 26px;
+  color: #111827;
+  margin: 0 0 5px 0;
+  font-weight: 700;
+}
+
+.login-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 25px;
+}
+
+.google-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: transparent;
+  border: 1px solid #d1d5db;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.google-btn:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 25px 0;
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.divider span {
+  padding: 0 15px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-with-icon .icon {
+  position: absolute;
+  left: 15px;
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.input-with-icon input {
+  width: 100%;
+  padding: 14px 14px 14px 42px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
+  /* Added a soft white background so the boxes pop against the blue card */
+  background: rgba(255, 255, 255, 0.6); 
+  color: #111;
+  margin-bottom: 0;
+}
+
+.input-with-icon input:focus {
+  border-color: #272838;
+  box-shadow: 0 0 0 3px rgba(39, 40, 56, 0.1);
+}
+
+.login-submit-btn {
+  width: 100%;
+  background: #272838;
+  color: #fff;
+  border: none;
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 10px;
+}
+
+.login-submit-btn:hover {
+  background: #1a1b26;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(39, 40, 56, 0.2);
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.signup-link span {
+  color: #272838;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline transparent;
+  transition: 0.2s;
+}
+
+.signup-link span:hover {
+  text-decoration-color: #272838;
+}
+/* =========================================
+   DASHBOARD STYLES
+   ========================================= */
+.dashboard-wrapper {
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Keeps it near the top */
+}
+
+.dashboard-card {
+  /* The rich, dark blue shade you requested */
+  background: rgba(17, 24, 39, 0.95); 
+  backdrop-filter: blur(20px);
+  width: 100%;
+  max-width: 1000px;
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.dashboard-logo {
+  height: 60px;
+  /* The white glowing shadow to make dark text readable on the dark blue background! */
+  filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.8)); 
+}
+
+.sign-out-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.sign-out-btn:hover {
+  background: #fca5a5;
+  color: #111;
+  border-color: #fca5a5;
+}
+
+/* Dashboard Form */
+.dashboard-form {
+  display: flex;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 40px;
+}
+
+.dashboard-form input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: white;
+  padding: 10px 20px;
+  font-size: 15px;
+  outline: none;
+}
+
+.dashboard-form input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dashboard-form select {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 0 20px;
+  outline: none;
+  cursor: pointer;
+}
+
+.dashboard-form select option {
+  color: black;
+}
+
+.add-btn {
+  background: #a2c4f2;
+  color: #111827;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.add-btn:hover {
+  background: white;
+}
+
+/* Dashboard Columns */
+.dashboard-columns {
+  display: flex;
+  gap: 30px;
+}
+
+.column {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 25px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.column h3 {
+  margin: 0 0 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+}
+
+.count-badge {
+  background: #a2c4f2;
+  color: #111827;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.completed-col h3 {
+  color: #9ca3af;
+}
+
+.completed-col .count-badge {
+  background: #4b5563;
+  color: white;
+}
+
+/* Item Cards */
+.item-card {
+  background: white;
+  color: #111827;
+  padding: 12px 15px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.item-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.item-title img {
+  width: 35px;
+  border-radius: 6px;
+}
+
+.completed-card {
+  background: #374151;
+  color: #9ca3af;
+  text-decoration: line-through;
+}
+
+.completed-card img {
+  filter: grayscale(100%) opacity(0.7);
+}
+
+.delete-icon {
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  font-size: 16px;
+  cursor: pointer;
+}
+.item-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.complete-icon {
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.complete-icon:hover {
+  color: #10b981; /* A nice satisfying green */
+  transform: scale(1.2);
+}
+
+.delete-icon:hover {
+  color: #ef4444;
+}
+
+/* Responsive adjustment */
+@media(max-width: 768px) {
+  .dashboard-columns { flex-direction: column; }
+  .dashboard-form { flex-direction: column; border-radius: 25px; }
+  .dashboard-form select { padding: 15px; }
+}
