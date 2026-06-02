@@ -724,3 +724,43 @@ body {
   border: 1px solid #e5e7eb;
   background: #f9fafb;
 }
+/* --- Mobile Responsiveness --- */
+@media (max-width: 600px) {
+  /* Make the main card take up the whole screen width */
+  .dashboard-wrapper {
+    padding: 10px;
+  }
+  
+  .dashboard-card {
+    width: 100%;
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  /* Stack the header logo and buttons neatly */
+  .dashboard-header {
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+  }
+
+  /* Make the header buttons sit side-by-side perfectly */
+  .header-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  /* Stretch the buttons so they are easy to tap */
+  .header-actions button {
+    margin: 0 !important; 
+    flex: 1; 
+  }
+
+  /* Fix profile stats layout for small screens */
+  .profile-stats {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
