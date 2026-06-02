@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# 📚🎬 Media Shelf
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Live Demo:** https://media-shelf-lrtj.vercel.app/
 
-## Available Scripts
+Media Shelf is a full-stack, mobile-responsive web application designed to help users beautifully curate and track their digital library. Whether it is keeping track of the movies you want to watch or the books you have finished reading, Media Shelf organizes your media in one clean, intuitive space.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## ✨ Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* **Secure Authentication:** Full user signup and login system with encrypted password hashing.
+* **Personalized Dashboard:** Add, track, and manage your "Up Next" and "Completed" movies and books.
+* **Profile & Stats:** A dedicated user profile page that automatically calculates and displays your reading vs. watching statistics.
+* **Secure Account Management:** Users can securely update and change their passwords.
+* **Fully Responsive:** Custom CSS ensures the UI snaps perfectly to mobile screens, tablets, and desktop displays.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🛠️ Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Frontend (The UI)**
+* React.js
+* Custom CSS (Mobile-First approach)
+* Hosted on **Vercel**
 
-### `npm run build`
+**Backend (The API)**
+* Python / Flask
+* Hosted on **Render**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Database**
+* SQLite (Stores users, passwords, and media items)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🚀 Running the Project Locally
 
-### `npm run eject`
+If you would like to run this project on your local machine, follow these steps:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 1. Clone the Repository
+```bash
+git clone [https://github.com/nitikajain25/media-shelf.git](https://github.com/nitikajain25/media-shelf.git)
+cd media-shelf
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 2. Set Up the Python Backend
+Open a terminal in the main `media-shelf` folder:
+```bash
+# Install the required Python libraries
+pip install -r requirements.txt
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Start the Flask server
+python app.py
+```
+*The backend will now be running on `http://127.0.0.1:5000`*
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 3. Set Up the React Frontend
+Open a *second* terminal, navigate to the frontend folder, and start React:
+```bash
+cd frontend
+npm install
+npm start
+```
+*The frontend will automatically open in your browser at `http://localhost:3000`*
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🔮 Future Roadmap
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* **OAuth Integration:** Add "Sign in with Google" functionality.
+* **API Fetching:** Integrate the OMDB or Google Books API to automatically pull in cover art and summaries when a user types a title.
+* **Social Sharing:** Allow users to share their "Completed" shelf with friends.
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+*Designed and built by Nitika Jain*
