@@ -19,7 +19,7 @@ function Profile() {
 
   const fetchUserItems = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/api/items?user_id=${user.id}`);
+      const response = await fetch(`https://media-shelf.onrender.com/api/items?user_id=${user.id}`);
       const data = await response.json();
       setItems(data);
     } catch (error) {
@@ -30,7 +30,7 @@ function Profile() {
   const handlePasswordChange = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://127.0.0.1:5000/api/change-password', {
+      const response = await fetch('https://media-shelf.onrender.com/api/change-password', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

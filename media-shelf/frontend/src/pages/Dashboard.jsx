@@ -22,7 +22,7 @@ function Dashboard() {
   const fetchItems = async () => {
     try {
       // 3. Attach the user.id to the URL so Python knows whose shelf to load
-      const response = await fetch(`http://127.0.0.1:5000/api/items?user_id=${user.id}`);
+      const response = await fetch(`https://media-shelf.onrender.com/api/items?user_id=${user.id}`);
       const data = await response.json();
       setItems(data);
     } catch (error) {
@@ -32,7 +32,7 @@ function Dashboard() {
 
   const addItem = async (e) => {
     e.preventDefault();
-    await fetch('http://127.0.0.1:5000/api/items', {
+    await fetch('https://media-shelf.onrender.com/api/items', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       // 4. Package the real user.id along with the movie title
@@ -45,13 +45,13 @@ function Dashboard() {
   // ... keep the rest of your functions (completeItem, deleteItem) the exact same!
   
   const completeItem = async (id) => {
-    await fetch(`http://127.0.0.1:5000/api/items/${id}`, { method: 'PUT' });
+    await fetch(`https://media-shelf.onrender.com/api/items/${id}`, { method: 'PUT' });
     fetchItems(); // Refresh the list to instantly move it!
   };
 
   const deleteItem = async (id) => {
     if (window.confirm("Remove this from your board?")) {
-      await fetch(`http://127.0.0.1:5000/api/items/${id}`, { method: 'DELETE' });
+      await fetch(`https://media-shelf.onrender.com/api/items/${id}`, { method: 'DELETE' });
       fetchItems();
     }
   };
