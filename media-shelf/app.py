@@ -86,6 +86,36 @@ def login():
         }), 200
     else:
         return jsonify({"error": "Invalid username or password"}), 401
+# 3. CHANGE PASSWORD ROUTE
+@app.route('/api/change-password', methods=['PUT'])
+def change_password():
+    data = request.get_json()
+    user_id = data.get('user_id')
+    current_password = data.get('current_password')
+    new_password = data.get('new_password')
+
+    if not user_id or not current_password or not new_password:
+        return jsonify({"error": "Missing fields"}), 400
+
+    conn = sqlite3.connect(DB_FILE)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    
+    # Find the user
+    cursor.execute("SELECT * FROM users WHERE id = ?", (user_id,))
+    user = cursor.fetchone()
+
+    # Verify old password matches
+    if user and check_password_hash(user["password"], current_password):
+        # Hash the new password and save it
+        hashed_new_password = generate_password_hash(new_password)
+        cursor.execute("UPDATE users SET password = ? WHERE id = ?", (hashed_new_password, user_id))
+        conn.commit()
+        conn.close()
+        return jsonify({"message": "Password updated successfully!"}), 200
+    else:
+        conn.close()
+        return jsonify({"error": "Incorrect current password"}), 401
 
 # =========================================
 # MEDIA SHELF ROUTES

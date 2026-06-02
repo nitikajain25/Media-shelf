@@ -671,3 +671,56 @@ body {
   .dashboard-form { flex-direction: column; border-radius: 25px; }
   .dashboard-form select { padding: 15px; }
 }
+/* Profile Page Styles */
+.profile-card {
+  max-width: 600px;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 40px 0;
+}
+
+.stat-box {
+  background: #f3f4f6;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  flex: 1;
+}
+
+.stat-icon {
+  font-size: 40px;
+}
+
+.stat-box h3 {
+  font-size: 36px;
+  color: #111827;
+  margin: 10px 0 5px 0;
+}
+
+.stat-box p {
+  color: #6b7280;
+  margin: 0;
+  font-weight: 600;
+}
+
+.password-section {
+  text-align: left;
+}
+
+.password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.password-form input {
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+}

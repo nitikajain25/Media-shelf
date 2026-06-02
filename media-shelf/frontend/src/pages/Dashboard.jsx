@@ -63,10 +63,14 @@ function Dashboard() {
     <div className="dashboard-wrapper">
       <div className="dashboard-card">
         
-        {/* Header Section */}
+       {/* Header Section */}
         <div className="dashboard-header">
           <img src="/logo.png" alt="Media Shelf" className="dashboard-logo" />
-          <button className="sign-out-btn" onClick={() => navigate('/')}>Sign Out</button>
+          <div className="header-actions">
+            {/* NEW: Profile Button */}
+            <button className="add-btn" onClick={() => navigate('/profile')} style={{marginRight: '10px'}}>Profile</button>
+            <button className="sign-out-btn" onClick={() => navigate('/')}>Sign Out</button>
+          </div>
         </div>
 
         {/* Input Form */}
