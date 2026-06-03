@@ -69,23 +69,30 @@ def register():
 @app.route('/api/login', methods=['POST'])
 def login():
     data = request.get_json()
-    username = data.get('username')
+    username = data.get('username') # or email, depending on how you set it up
     password = data.get('password')
 
     conn = sqlite3.connect(DB_FILE)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
+    
+    # 1. First, check if the user even exists
     cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
     user = cursor.fetchone()
-    conn.close()
 
-    if user and check_password_hash(user["password"], password):
-        return jsonify({
-            "message": "Login successful!",
-            "user": {"id": user["id"], "username": user["username"]}
-        }), 200
+    if not user:
+        conn.close()
+        # NEW: Tell them exactly what is wrong!
+        return jsonify({"error": "Account not found. Please Sign Up first!"}), 404
+
+    # 2. If the user exists, check the password
+    if check_password_hash(user["password"], password):
+        conn.close()
+        return jsonify({"message": "Login successful", "user": dict(user)}), 200
     else:
-        return jsonify({"error": "Invalid username or password"}), 401
+        conn.close()
+        # NEW: Specific password error
+        return jsonify({"error": "Incorrect password. Please try again."}), 401
 # 3. CHANGE PASSWORD ROUTE
 @app.route('/api/change-password', methods=['PUT'])
 def change_password():
