@@ -66,10 +66,11 @@ def register():
     finally:
         conn.close()
 
+# 2. LOGIN ROUTE (Updated with Smart Errors)
 @app.route('/api/login', methods=['POST'])
 def login():
     data = request.get_json()
-    username = data.get('username') # or email, depending on how you set it up
+    username = data.get('username') 
     password = data.get('password')
 
     conn = sqlite3.connect(DB_FILE)
@@ -82,7 +83,7 @@ def login():
 
     if not user:
         conn.close()
-        # NEW: Tell them exactly what is wrong!
+        # Tell them exactly what is wrong
         return jsonify({"error": "Account not found. Please Sign Up first!"}), 404
 
     # 2. If the user exists, check the password
@@ -91,7 +92,7 @@ def login():
         return jsonify({"message": "Login successful", "user": dict(user)}), 200
     else:
         conn.close()
-        # NEW: Specific password error
+        # Specific password error
         return jsonify({"error": "Incorrect password. Please try again."}), 401
 # 3. CHANGE PASSWORD ROUTE
 @app.route('/api/change-password', methods=['PUT'])
