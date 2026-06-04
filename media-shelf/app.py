@@ -44,7 +44,7 @@ init_db()
 # AUTHENTICATION ROUTES
 # =========================================
 
-@app.route('/api/register', methods=['POST'])
+@app.route('/api/signup', methods=['POST'])
 def register():
     data = request.get_json()
     username = data.get('username')
