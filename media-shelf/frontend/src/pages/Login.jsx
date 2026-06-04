@@ -28,7 +28,8 @@ function Login() {
           localStorage.setItem('user', JSON.stringify(data.user));
           navigate('/dashboard');
         } else {
-          localStorage.setItem('user', JSON.stringify({ username: username })); 
+          // NEW: Now we save the full data.user so React has the ID!
+          localStorage.setItem('user', JSON.stringify(data.user)); 
           navigate('/dashboard');
         }
       } else {

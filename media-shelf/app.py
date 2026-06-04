@@ -45,7 +45,7 @@ init_db()
 # =========================================
 
 @app.route('/api/signup', methods=['POST'])
-def register():
+def signup():
     data = request.get_json()
     username = data.get('username')
     password = data.get('password')
@@ -55,12 +55,19 @@ def register():
 
     hashed_password = generate_password_hash(password)
     conn = sqlite3.connect(DB_FILE)
+    conn.row_factory = sqlite3.Row # This is important to get the data as a dictionary
     cursor = conn.cursor()
     
     try:
         cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, hashed_password))
         conn.commit()
-        return jsonify({"message": "User registered successfully!"}), 201
+        
+        # NEW: Fetch the exact user we just created so we have their ID!
+        cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+        new_user = cursor.fetchone()
+        
+        # Send the user object (with the ID) back to React
+        return jsonify({"message": "User registered successfully!", "user": dict(new_user)}), 201
     except sqlite3.IntegrityError:
         return jsonify({"error": "Username already taken"}), 400
     finally:
